@@ -14,7 +14,7 @@ const signin = async(req,res)=>{
                 return res.status(404).json({message : "User doesn't exist."});
         }
         
-       const isPasswordCorrect = await bcrypt.compare(password , User.password);
+       const isPasswordCorrect = await bcrypt.compare(password , existingUser.password);
         
        if(!isPasswordCorrect ){
             return res.status(404).json({message : "Invalied credintial."});
@@ -36,10 +36,11 @@ const signin = async(req,res)=>{
 
 
 const signup = async(req,res)=>{
-    const {firstName , lastName , email , Phone ,address ,password , confirmpassword  } = req.body;
+    var {firstName , lastName , email , Phone ,address ,password , confirmpassword} = req.body;
+    
     try{
-            const existingUser = await User.findOne({email});
-            if(existingUser){
+            const existingUser2 = await User.findOne({email});
+            if(existingUser2){
                return  res.status(400).json({message : "user already exists."});
             }
             
