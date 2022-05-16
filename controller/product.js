@@ -19,8 +19,9 @@ const getAllProduct = async(req,res)=>{
 
 const createProduct = async(req,res)=>{
     const {title ,desc, img,categories, price}= req.body;
+    const userId = req.userId;
     const newProduct = new Product({
-        title ,desc, img,categories, price
+        userId, title ,desc, img,categories, price
     });
     try{
         const product = await newProduct.save();

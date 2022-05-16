@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-
+    userId: {
+        type: String,
+        default: "test",
+        
+    },
+    
     title: {
         type: String,
         required: true,
